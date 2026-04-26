@@ -59,7 +59,7 @@ export default function FeedPage() {
         ) : (
           <>
             {visibleCards.map(card => (
-              <div key={card.id} className="snap-start h-screen">
+              <div key={card.id} className="snap-start py-3">
                 <LearningCard card={card} />
               </div>
             ))}

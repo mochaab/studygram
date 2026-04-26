@@ -1,0 +1,81 @@
+{
+  "slug": "istio",
+  "category": "Security",
+  "name": "Istio Service Mesh",
+  "description": "How Istio brings automatic security, traffic control, and observability to your microservices — without touching your app code.",
+  "nextSlug": "jwt-mtls",
+  "cards": [
+    {
+      "id": "istio-no-mesh",
+      "topic": "Istio Service Mesh",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "Before the Mesh: Life with Nginx",
+      "description": "Without a service mesh, teams typically put Nginx in front of everything. Nginx terminates TLS from the outside world — great! But once traffic gets inside your cluster, services talk to each other over plain HTTP. There's no encryption between them, no automatic policy, and no visibility into what's happening. You're trusting that nothing goes wrong inside.",
+      "diagramComponent": "istio-no-mesh.jsx"
+    },
+    {
+      "id": "istio-advantages",
+      "topic": "Istio Service Mesh",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "Why Istio? The Key Benefits",
+      "description": "Istio sits between your services and handles the hard stuff — so your code doesn't have to. Drop it into your cluster and you get automatic encryption between every service, smart traffic routing (like canary deployments and retries), and deep observability with zero code changes. Think of it as an invisible operations team embedded in your network.",
+      "diagramComponent": "istio-advantages.jsx"
+    },
+    {
+      "id": "istio-what-is-classic",
+      "topic": "Istio Service Mesh",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "What is Istio Classic?",
+      "description": "Istio Classic works by giving every service its own personal bodyguard called an Envoy proxy. This bodyguard lives inside the same pod as your app. Every message your service sends or receives goes through the bodyguard first — who handles encryption, checks identity, and logs everything. Your app writes zero security code. The guard does it all, automatically.",
+      "diagramComponent": "istio-what-is-classic.jsx"
+    },
+    {
+      "id": "istio-what-is-ambient",
+      "topic": "Istio Service Mesh",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "What is Istio Ambient?",
+      "description": "Istio Ambient ditches the per-pod bodyguard entirely. Instead, picture a security booth at the entrance of each floor of a building — that's ztunnel. One ztunnel runs per Kubernetes node and invisibly intercepts all traffic from every pod on that node. Pods stay completely clean with no extra containers. Less overhead, same security, zero app changes.",
+      "diagramComponent": "istio-what-is-ambient.jsx"
+    },
+    {
+      "id": "istio-classic",
+      "topic": "Istio Service Mesh",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "Istio Classic: Architecture",
+      "description": "In Classic mode, every pod gets an Envoy sidecar injected automatically. The control plane (Istiod) pushes config to each sidecar. When services talk, the traffic goes sidecar-to-sidecar over mTLS — your app containers never see the encryption. The cost: one extra container running inside every pod, all the time.",
+      "diagramComponent": "istio-classic.jsx"
+    },
+    {
+      "id": "istio-ambient",
+      "topic": "Istio Service Mesh",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "Istio Ambient: Architecture",
+      "description": "In Ambient mode, pods are completely clean — no sidecar injected. Instead, Istiod programs a ztunnel agent that runs once per Kubernetes node (as a DaemonSet). All pod traffic on that node flows through ztunnel automatically at the kernel level. ztunnels on different nodes talk to each other over mTLS. Pods never know security is happening.",
+      "diagramComponent": "istio-ambient.jsx"
+    },
+    {
+      "id": "istio-ztunnel",
+      "topic": "Istio Service Mesh",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "ztunnel: The Ambient Security Desk",
+      "description": "ztunnel is the engine behind Ambient mode. Picture a hotel: in Classic mode, every guest carries their own ID scanner. In Ambient mode, there's one security desk in the lobby — the ztunnel. It sits at the Linux kernel level on each node, intercepts all pod traffic transparently, enforces mTLS, applies L4 policies, and emits telemetry. Pods don't know it exists.",
+      "diagramComponent": "istio-ztunnel.jsx"
+    },
+    {
+      "id": "istio-comparison",
+      "topic": "Istio Service Mesh",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "Classic vs Ambient: Which One?",
+      "description": "Classic mode gives you deep per-service control — great for complex routing, advanced policies, and L7 visibility. But it costs memory and CPU per pod. Ambient mode is lighter, simpler to operate, and perfect for teams who just want automatic mTLS and basic policies without the operational overhead. When in doubt, start with Ambient.",
+      "diagramComponent": "istio-comparison.jsx"
+    }
+  ]
+}

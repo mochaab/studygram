@@ -1,26 +1,30 @@
+import istioInfo from '../../../resources/DevOpsCon2024/topic1-istio-service-mesh/information.json'
+import securityInfo from '../../../resources/DevOpsCon2024/topic2-jwt-vs-mtls/information.json'
 import { istioCards } from './istio.jsx'
 import { securityCards } from './security.jsx'
 
 export const topics = {
-  istio: {
-    name: 'Istio Service Mesh',
-    description: 'How Istio brings automatic security, traffic control, and observability to your microservices — without touching your app code.',
-    category: 'Security',
-    nextSlug: 'jwt-mtls',
+  [istioInfo.slug]: {
+    name: istioInfo.name,
+    description: istioInfo.description,
+    category: istioInfo.category,
+    nextSlug: istioInfo.nextSlug,
     cards: istioCards,
   },
-  'jwt-mtls': {
-    name: 'JWT vs mTLS',
-    description: 'Two pillars of modern security — one proves who the user is, the other proves which machine is talking.',
-    category: 'Security',
-    nextSlug: null,
+  [securityInfo.slug]: {
+    name: securityInfo.name,
+    description: securityInfo.description,
+    category: securityInfo.category,
+    nextSlug: securityInfo.nextSlug,
     cards: securityCards,
   },
 }
 
-export const categories = {
-  Security: ['istio', 'jwt-mtls'],
-}
+export const categories = [istioInfo, securityInfo].reduce((acc, info) => {
+  if (!acc[info.category]) acc[info.category] = []
+  acc[info.category].push(info.slug)
+  return acc
+}, {})
 
 export const suggestions = Object.entries(categories).map(([cat, slugs]) => ({
   category: cat,

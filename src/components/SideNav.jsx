@@ -29,7 +29,7 @@ function BookmarkIcon() {
 const links = [
   { to: '/', label: 'Home', Icon: HomeIcon },
   { to: '/search', label: 'Search', Icon: SearchIcon },
-  { to: '/learning-book', label: 'Learning Book', Icon: BookmarkIcon },
+  { to: '/learning-book', label: 'Notebook', Icon: BookmarkIcon },
 ]
 
 export default function SideNav() {

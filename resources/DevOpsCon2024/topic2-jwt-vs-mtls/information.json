@@ -1,0 +1,54 @@
+{
+  "slug": "jwt-mtls",
+  "category": "Security",
+  "name": "JWT vs mTLS",
+  "description": "Two pillars of modern security — one proves who the user is, the other proves which machine is talking.",
+  "nextSlug": null,
+  "cards": [
+    {
+      "id": "jwt-mtls-intro",
+      "topic": "JWT vs mTLS",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "JWT & mTLS: The Big Picture",
+      "description": "JWT and mTLS both deal with trust — but at different layers. mTLS asks \"is this machine who it says it is?\" at the network level. JWT asks \"is this user or client allowed to do this?\" at the application level. In a modern system you typically need both: mTLS to secure the pipes between your services, JWT to check that the person on the other end has permission.",
+      "diagramComponent": "jwt-mtls-intro.jsx"
+    },
+    {
+      "id": "jwt-detail",
+      "topic": "JWT vs mTLS",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "JWT: How It Works",
+      "description": "A JWT is like a signed wristband you get at a concert. The venue (auth server) stamps it when you arrive. Every booth inside can read the wristband and trust it without calling the venue again. The token contains three parts: a header describing the algorithm, a payload with your identity and permissions, and a signature that proves nobody tampered with it.",
+      "diagramComponent": "jwt-detail.jsx"
+    },
+    {
+      "id": "jwt-usecases",
+      "topic": "JWT vs mTLS",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "JWT: Where Do We Use It?",
+      "description": "JWT shines anywhere you need to carry user identity across systems without a database lookup on every request. Common scenarios: a user logs into your web app (the auth server issues a JWT), that JWT is sent with every API call, and each service reads the claims (role, user ID, expiry) directly from the token. It's also the backbone of single sign-on (SSO) across multiple services.",
+      "diagramComponent": "jwt-usecases.jsx"
+    },
+    {
+      "id": "mtls-detail",
+      "topic": "JWT vs mTLS",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "mTLS: How It Works",
+      "description": "Normal TLS is one-directional — the server proves its identity (like a website showing its padlock). mTLS (Mutual TLS) goes both ways: the server and the client both show certificates before any data flows. Think of it as two bouncers checking each other's IDs at the door. Only after both sides verify does the encrypted connection open.",
+      "diagramComponent": "mtls-detail.jsx"
+    },
+    {
+      "id": "mtls-usecases",
+      "topic": "JWT vs mTLS",
+      "tag": "Security",
+      "contributor": "Charissa",
+      "title": "mTLS: Where Do We Use It?",
+      "description": "mTLS is the gold standard for securing communication between services inside a cluster. If you're running microservices on Kubernetes, Istio can automatically issue certificates to every service and enforce mTLS on every connection — without changing a single line of app code. It's also used in zero-trust architectures where nothing inside the network is trusted by default.",
+      "diagramComponent": "mtls-usecases.jsx"
+    }
+  ]
+}

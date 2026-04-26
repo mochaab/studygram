@@ -51,7 +51,7 @@ export default function LearningBookPage() {
           </span>
         </div>
         <div className="flex items-center justify-between">
-          <h1 className="text-base font-bold text-white">Learning Book</h1>
+          <h1 className="text-base font-bold text-white">Notebook</h1>
           {!isEmpty && (
             <span className="text-xs text-slate-500">{saved.length} card{saved.length !== 1 ? 's' : ''} saved</span>
           )}
@@ -66,9 +66,9 @@ export default function LearningBookPage() {
             <line x1="12" y1="7" x2="12" y2="13" />
             <line x1="9" y1="10" x2="15" y2="10" />
           </svg>
-          <h2 className="text-xl font-bold text-white">Your Learning Book is empty</h2>
+          <h2 className="text-xl font-bold text-white">Your Notebook is empty</h2>
           <p className="text-slate-500 text-sm text-center">
-            Hit <span className="text-accent-teal font-medium">"Add to Learning Book"</span> on any card while scrolling
+            Hit <span className="text-accent-teal font-medium">"Add to Notebook"</span> on any card while scrolling
           </p>
           <Link
             to="/"

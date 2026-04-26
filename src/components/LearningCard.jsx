@@ -40,11 +40,6 @@ function ChevronIcon({ up }) {
   )
 }
 
-const LEVELS = [
-  { key: 'understand', label: 'I can understand it', color: 'text-sky-400 border-sky-500/50 bg-sky-500/10 hover:bg-sky-500/20' },
-  { key: 'explain', label: 'I can explain it in my own words', color: 'text-emerald-400 border-emerald-500/50 bg-emerald-500/10 hover:bg-emerald-500/20' },
-]
-
 const MASTERY_BADGE = {
   understand: { label: 'Understood', cls: 'text-sky-400 bg-sky-500/10 border-sky-500/30' },
   explain: { label: 'Mastered', cls: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30' },
@@ -54,8 +49,9 @@ export default function LearningCard({ card }) {
   const [liked, setLiked] = useState(false)
   const [likeCount] = useState(Math.floor(Math.random() * 800) + 100)
   const [collapsed, setCollapsed] = useState(false)
+  const [descExpanded, setDescExpanded] = useState(false)
   const { isSaved, addCard, removeCard } = useLearningBook()
-  const { getMastery, markCard } = useMastery()
+  const { getMastery } = useMastery()
 
   const saved = isSaved(card.id)
   const mastery = getMastery(card.id)
@@ -66,8 +62,8 @@ export default function LearningCard({ card }) {
   }
 
   return (
-    <div className="snap-start flex-shrink-0 w-full h-full flex items-center justify-center p-4">
-      <div className="w-full max-w-md h-full max-h-[calc(100vh-8rem)] flex flex-col bg-navy-800 rounded-2xl overflow-hidden shadow-2xl border border-navy-600 animate-fadeup">
+    <div className="w-full flex justify-center px-4 py-2">
+      <div className="w-full max-w-md h-[calc(100vh-8rem)] flex flex-col bg-navy-800 rounded-2xl overflow-hidden shadow-2xl border border-navy-600 animate-fadeup">
 
         {/* Topic tag + mastery badge + collapse toggle */}
         <div className="px-4 pt-4 pb-2 flex items-center gap-2">
@@ -102,32 +98,16 @@ export default function LearningCard({ card }) {
             </div>
 
             {/* Description */}
-            <p className="px-4 pb-3 text-sm text-slate-300 leading-relaxed line-clamp-3">
-              {card.description}
-            </p>
-
-            {/* Evaluation */}
             <div className="px-4 pb-3">
-              {mastery ? (
-                <p className="text-xs text-slate-600 text-center">
-                  This card won't appear in future sessions · it'll be hidden from your feed
-                </p>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  <p className="text-xs text-slate-500 font-medium">How well do you know this?</p>
-                  <div className="flex gap-2">
-                    {LEVELS.map(({ key, label, color }) => (
-                      <button
-                        key={key}
-                        onClick={() => markCard(card.id, key)}
-                        className={`flex-1 text-xs font-medium py-2 px-2 rounded-lg border transition-all ${color}`}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+              <p className={`text-sm text-slate-300 leading-relaxed ${descExpanded ? '' : 'line-clamp-3'}`}>
+                {card.description}
+              </p>
+              <button
+                onClick={() => setDescExpanded(e => !e)}
+                className="text-xs text-accent-teal mt-1 hover:text-teal-300 transition-colors"
+              >
+                {descExpanded ? 'Show less' : 'Show more'}
+              </button>
             </div>
           </>
         )}
@@ -156,7 +136,7 @@ export default function LearningCard({ card }) {
             }`}
           >
             {saved ? <CheckIcon /> : <BookPlusIcon />}
-            {saved ? 'In Learning Book' : 'Add to Learning Book'}
+            {saved ? 'In Notebook' : 'Add to Notebook'}
           </button>
         </div>
       </div>
